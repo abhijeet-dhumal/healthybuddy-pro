@@ -88,6 +88,6 @@ venv/
 ENV/
 
 # sqllite
-db.*
+db.sqlite3
 
 logs
