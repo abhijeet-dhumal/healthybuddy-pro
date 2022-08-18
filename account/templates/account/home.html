@@ -130,7 +130,9 @@
     <div class="box-container">
         {% for doctor in doctors %}
         <div class="box">
+            {% if doctor.image %}
             <img src="{{doctor.image.url}}" alt="">
+            {% endif %}
             <h3>Mr./Mrs {{doctor.first_name}} {{doctor.last_name}}</h3>
             <span>expert {{doctor.specialization}}</span>
             <div class="share">
@@ -159,7 +161,9 @@
         <div class="box-container mb-3">
             {% for review in reviews %}
             <div class="box">
+                {% if review.user.image %}
                 <img src="{{review.user.image.url}}" alt="{{review.user}}">
+                {% endif %}
                 <h3>{{review.user.first_name}} {{review.user.last_name}}</h3>
                 <div class="stars">
                     <h3>{{review.stars}}/5<i class="fas fa-star" style="color:yellow"></i></h3>
