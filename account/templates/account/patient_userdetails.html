@@ -1,0 +1,51 @@
+{% extends 'account/patient_base.html' %}
+
+
+{% block body %}
+{% load static %}
+    <div class="container" style="justify-content: center;align-items: center;">
+        
+        <div class="container col-md-12">
+            <h1>User-Details : </h1><a href="{% url 'doctorslist'%}" class="mx-3" style="border:1px solid grey;padding:5px;">Book appointment</a>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <!-- <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th> -->
+                        <th scope="col">Role</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Pincode</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{userdetails.id}}</th>
+                        <td>{{patientdetails.name}}</a></td>
+                        <!-- <td>{{profiledetails.first_name}}</a></td>
+                        <td>{{profiledetails.last_name}}</a></td> -->
+                        <td>{{patientdetails.role}}</td>
+                        <!-- <td>{{userdetails.email}}</td> -->
+                        <td>{{patientdetails.address_line1}}</td>
+                        <td>{{patientdetails.city}}</td>
+                        <td>{{patientdetails.state}}</td>
+                        <td>{{patientdetails.country}}</td>
+                        <td>{{patientdetails.pincode}}</td>
+                        
+                        <td><a href="{% url 'updatepatientdetails' patientdetails.id %}">Update</a></td>
+                        <td><a href="{% url 'deletepatientdetails' patientdetails.id %}">Delete</a></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+{% endblock %}

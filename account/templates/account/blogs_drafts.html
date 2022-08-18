@@ -1,0 +1,62 @@
+{% extends 'account/home.html' %}
+
+
+{% block body %}
+{% load static %}
+<section class="home" style="justify-content: center;align-items: center;">
+    <div class="container">
+        <div class="container">
+            <div class="container-fluid" style="align-items: center;">
+                <h3>Drafts</h3>
+                <!-- <span>{{current_user}}</span> -->
+                <!-- <a href="{% url 'usernames' %}"
+                    style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
+
+                <hr>
+                <form method="get">
+                    {{myfilter.form}}
+                    <button class="btn btn-sm btn-outline-secondary col-3 mt-1 mb-2 mx-3" type="submit"
+                        style="width:100px;">Search</a>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+
+                        <th scope="col">Image</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Content</th>
+                        <th scope="col">Date_created</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in blogdetail %}
+                    <tr>
+                        <th scope="row">{{detail.id}}</th>
+                        <th><img src="/media/{{detail.image}}" alt="Profile_pic"
+                                style="max-width:10vw;border:1px solid grey;padding:5px;"></th>
+
+                        <th scope="row">{{detail.name}}</th>
+                        <th scope="row">{{detail.title}}</th>
+                        <th scope="row">{{detail.category}}</th>
+                        <th scope="row">{{detail.summary}}</th>
+                        <th scope="row">{{detail.content}}</th>
+                        <th scope="row">{{detail.date_created}}</th>
+                        <th scope="row"><a href="{% url 'blogs_update' detail.id %}"
+                                style="border:1px solid grey;padding:1vh;">Post</a></th>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

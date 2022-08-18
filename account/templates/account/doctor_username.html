@@ -1,0 +1,47 @@
+{% extends 'account/doctor_base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container" style="justify-content: center;align-items: center;margin-top: 5%;">
+
+    <div class="container col-md-6" style="padding:30px;border:1px solid #aaa;margin-top: 10px;">
+        <div class="container d-flex">
+            <h1>Users: </h1>
+            <span class="mx-4 my-3">Hii @{{current_user}} !!!</span>
+            <a href="{% url 'blogs' %}" class="my-3 mx-3"><span
+                    style="border:1px solid grey;padding:5px;">Blogs</span></a>
+            <a href="{% url 'logoutuser' %}"><button class="btn btn-outline-danger mx-2 my-2">LogOut</button></a>
+
+        </div>
+        <hr>
+
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Role</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctordetail in doctordetails %}
+                    <tr>
+                        <th scope="row">{{doctordetail.id}}</th>
+                        <td><a href="{% url 'doctordetails' doctordetail.id %}">{{doctordetail.name}}</a></td>
+                        <th scope="row">{{doctordetail.role}}</th>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

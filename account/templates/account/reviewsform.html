@@ -1,0 +1,47 @@
+{% extends 'account/home.html' %}
+
+
+{% block body %}
+{% load static %}
+<section class="home">
+    <div class="container p-3" style="border: 1px solid grey;text-align:center;align-items:center;">
+        <div class="container">
+            <h3 style="font-size: 2rem;">Reviews form </h3>
+            <!-- <span><a href="{% url 'usernames' %}">Back</a></span> -->
+            <hr>
+            {% if form1.errors %}
+            {% for field in form1 %}
+            {% for error in field.errors %}
+            <div class="container my-2">
+                <div class="alert {{ message.tags }} alert-dismissible " role="alert"
+                    style="border:1px solid #aaa;padding:20px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ error }}
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="container">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <!-- <div class="col-md-3">
+                    <img src="{{form.image.url}}" alt="Profile_pic"
+                        style="width:15vw;border:1px solid grey;padding:5px;margin:1vw;">
+
+                </div> -->
+                    <div class="col-md-9">
+                        {{form.as_p}}
+                    </div>
+                </div>
+                <input type="Submit" class="btn my-0" value="Submit" />
+            </form>
+        </div>
+    </div>
+
+</section>>
+{% endblock %}

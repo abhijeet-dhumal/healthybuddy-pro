@@ -1,0 +1,208 @@
+{% extends 'account/index.html' %}
+
+
+{% block body %}
+{% load static %}
+<!-- home section starts  -->
+
+<section class="home" id="home">
+    {% include 'account/messages.html' %}
+    <div class="image">
+        <img src="{% static 'app/images/home-img.svg' %}" alt="">
+    </div>
+
+    <div class="content">
+        <h1 class="heading my-3"> Stay Healthy <span>Stay Safe</span> </h1>
+
+        <p>Hello Dear, Hope you are doing well!
+            Even if you don't we are here to help you.
+            We are availing the facility of appointment booking, previous reports checking, notifications regarding your
+            checkup and many more...
+            All the struggle we need to do to keep ourselves healthy we can do on a single click.
+            So Let's Get Started</p>
+        {% if not boolean %}
+        <a href="{%url 'LoginForm'%}" class="btn"> Login/SignUp <span class="fas fa-chevron-right"></span> </a>
+        {% endif %}
+    </div>
+
+</section>
+
+<!-- home section ends -->
+
+<!-- icons section starts  -->
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-user-md"></i>
+        <h3>{{doctor_count}}+</h3>
+        <p>Availibility Of Doctors</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-users"></i>
+        <h3>{{users_count}}+</h3>
+        <p>Users</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-hospital"></i>
+        <h3>{{blog_count}}+</h3>
+        <p>Blogs</p>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-procedures"></i>
+        <h3>{{appointment_count}}+</h3>
+        <p>Appointment Availibility</p>
+    </div>
+
+</section>
+
+<!-- icons section ends -->
+
+<!-- services section starts  -->
+
+<section class="services" id="services">
+
+    <h1 class="heading"> our <span>services</span> </h1>
+
+    <div class="box-container">
+
+        <div class="box">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Blogs</h3>
+            <p>Check blogs by our experts</p>
+            <a href="{% url 'blogs_view' %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+        <div class="box">
+            <i class="fa fa-calendar"></i>
+            <h3>Appointment Booking</h3>
+            <p>Book your appointment in advance.</p>
+            <a href="{% url 'appointments' %}" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+        <div class="box">
+            <i class="fas fa-user-md"></i>
+            <h3>Consultation</h3>
+            <p>Get your free primary consultation by our team.</p>
+            <a href="/#book" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- services section ends -->
+
+<!-- about section starts  -->
+
+<section class="about" id="about">
+
+    <h1 class="heading"> <span>about</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="{% static 'app/images/about-img.svg' %}" alt="">
+        </div>
+
+        <div class="content">
+            <h3>we take care of your healthy life</h3>
+            <p>We know, in todays life it has become very dificult to keep track of our health!</p>
+            <p>So, we have launched this app to help the people to take care of their health!</p>
+            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- about section ends -->
+
+<!-- doctors section starts  -->
+
+<section class="doctors" id="doctors">
+
+    <h1 class="heading my-3"> our <span>doctors</span> </h1>
+
+    <div class="box-container">
+        {% for doctor in doctors %}
+        <div class="box">
+            <img src="{{doctor.image.url}}" alt="">
+            <h3>Mr./Mrs {{doctor.first_name}} {{doctor.last_name}}</h3>
+            <span>expert {{doctor.specialization}}</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- doctors section ends -->
+
+
+
+    <!-- review section starts  -->
+
+    <section class="review" id="review">
+
+        <h1 class="heading my-3"> client's <span>review</span> </h1>
+        
+        <div class="box-container mb-3">
+            {% for review in reviews %}
+            <div class="box">
+                <img src="{{review.user.image.url}}" alt="{{review.user}}">
+                <h3>{{review.user.first_name}} {{review.user.last_name}}</h3>
+                <div class="stars">
+                    <h3>{{review.stars}}/5<i class="fas fa-star" style="color:yellow"></i></h3>
+                </div>
+                <p class="text">{{review.comment}}</p>
+            </div>
+            {% endfor %}
+
+        </div>
+        
+        <a href="{%url 'review-create' %}" class="btn mt-3"> Add Review <span class="fas fa-chevron-right"></span> </a>
+    </section>
+    
+    <!-- review section ends -->
+    
+</section>
+
+<!-- booking section starts   -->
+
+<section class="book" id="book">
+
+    <h1 class="heading my-3"> <span>Contact</span> us </h1>
+
+    <div class="row">
+
+        <div class="image">
+            <img src="{% static 'app/images/book-img.svg' %}" alt="">
+        </div>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h3>Your response will get recorded!!!</h3>
+            <input type="text" placeholder="your name" class="box", name="name">
+            <input type="text" placeholder="your contact number" class="box", name="phone">
+            <input type="email" placeholder="your email" class="box", name="email">
+            <input type="text" placeholder="Message" class="box", name="message">
+            <!-- <input type="date" class="box"> -->
+            <input type="submit" value="Submit" class="btn my-0">
+        </form>
+
+    </div>
+
+</section>
+
+<!-- booking section ends -->
+{% endblock %}

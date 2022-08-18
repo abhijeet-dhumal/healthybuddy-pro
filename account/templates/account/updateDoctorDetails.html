@@ -1,0 +1,52 @@
+{% extends 'account/doctor_base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid" style="align-items: center;justify-content: center;margin-top:5vh;">
+    <div class="header">
+        <span style="font-size: 2rem;margin-left:10vw;">User updation form </span>
+        <span><a href="{% url 'usernames' %}"
+                style="border:1px solid grey;padding:5px;float:right;margin-right:10%;">Back</a></span>
+        <hr>
+        {% if form1.errors %}
+        {% for field in form1 %}
+        {% for error in field.errors %}
+        <div class="container my-2">
+            <div class="alert {{ message.tags }} alert-dismissible " role="alert"
+                style="border:1px solid #aaa;padding:20px;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ error }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container" style="margin-left:10%;border:1px solid #aaa;padding:40px;">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-3">
+                    {% if imgs %}
+                    {% for i in imgs %}
+                    <img src="{{i.image.url}}" alt="Profile_pic"
+                        style="width:15vw;border:1px solid grey;padding:5px;margin:1vw;">
+                    {% endfor %}
+                    {%endif%}
+
+                </div>
+                <div class="col-md-9">
+
+                    {{registerform.as_p}}
+                    {{profileform.as_p}}
+                </div>
+                <input type="Submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+        integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="{% static 'app/CSS/new.css' %}">
+
+</head>
+
+<body>
+
+    <!-- header section starts  -->
+
+    <header class="header">
+
+        <a href="/" class="logo Lucida Handwriting">HealthBuddy</a>{% if boolean %}<h4 class="m-0 p-0 Lucida Handwriting"><a href="{% url 'first_page' %}" style="color:var(--green)">@{{userdetails.first_name}}_{{userdetails.last_name}}</a></h4>{% else %}<h4 class="m-0 p-0 Lucida Handwriting"><a href="{% url 'first_page' %}" style="color:var(--green)">_</a></h4>{% endif %}
+
+
+        <nav class="navbar">
+            {% if userdetails %}
+            {% endif %}
+            <a href="/">home</a>
+            <a href="/#services">services</a>
+            <a href="/#about">about</a>
+            <a href="/#review">reviews</a>
+            <a href="/#book">Contact us</a>
+            {% if boolean %}
+            <a href="{% url 'blogs_view' %}">blogs</a>
+            <a href="{% url 'first_page' %}">Profile</a>
+            <a class="fas fa-bell btn my-0" href="{% url 'notifications' %}"></a>
+            <a class="fas fa-sign-out-alt btn my-0" href="{% url 'logoutuser' %}"></a>
+            {% endif %}
+            <a class="fa fa-arrow-left btn my-0" href="{{request.META.HTTP_REFERER}}"></a>
+        </nav>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+    </header>
+    {% if current_user %}
+    <div style="margin:0 8vw;">Hii @{{current_user.name}}, Welcome to your personal healthcare buddy !!!</div>
+    {% else %}
+    <div style="margin:0 8vw;">Hii @User, Welcome to your personal healthcare buddy !!!</div>
+    {% endif %}
+    {% block body %}
+
+
+    <!-- header section ends -->
+
+    <!-- blogs section ends -->
+    {% endblock %}
+
+    <!-- footer section starts  -->
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="/"> <i class="fas fa-chevron-right"></i> home </a>
+                <a href="/#services"> <i class="fas fa-chevron-right"></i> services </a>
+                <a href="/#doctors"> <i class="fas fa-chevron-right"></i> doctors </a>
+                <a href="/#book"> <i class="fas fa-chevron-right"></i> book </a>
+                <a href="{% url 'blogs_view' %}"> <i class="fas fa-chevron-right"></i> blogs </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> reports </a>
+            </div>
+
+            <div class="box">
+                <h3>our services</h3>
+                <a href="#"> <i class="fas fa-chevron-right"></i> dental care </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> message therapy </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> cardioloty </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> diagnosis </a>
+                <a href="#"> <i class="fas fa-chevron-right"></i> ambulance service </a>
+            </div>
+
+            <div class="box">
+                <h3>contact info</h3>
+                <a href="#"> <i class="fas fa-envelope"></i>abhijeetdhumal@gmail.com </a>
+                <a href="#"> <i class="fas fa-envelope"></i>ruchikakalagate@gmail.com</a>
+                <a href="#"> <i class="fas fa-phone"></i> +910000000000 </a>
+                <a href="#"> <i class="fas fa-phone"></i> +910000000000 </a>
+                <a href="#"> <i class="fas fa-map-marker-alt"></i> Pune, India 412114 </a>
+            </div>
+
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+                <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+                <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+                <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+    <!-- footer section ends -->
+
+
+    <!-- custom js file link  -->
+    <script src="{% static 'app/JS/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $('.alert').alert()
+        })
+    </script>
+
+</body>
+
+</html>

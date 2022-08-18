@@ -1,0 +1,48 @@
+{% extends 'account/patient_base.html' %}
+
+
+{% block body %}
+{% load static %}
+    <div class="container" style="justify-content: center;align-items: left;">
+
+        <div class="container col-md-12">
+            <h1>Doctors-Details : </h1>
+            
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone</th>                        
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for detail in doctordetails %}
+                    <tr>
+                        <!-- <th scope="row">{{detail.id}}</th> -->
+                        <!-- <th scope="row">{{detail.image}}</th> -->
+
+                        <th><img src="/media/{{detail.image}}" alt="Profile_pic"
+                                style="max-width:5vw;border:1px solid grey;padding:5px;"></th>
+
+                        <th scope="row">{{detail.name}}</th>
+                        <th>{{detail.phone}}</th>
+                        <th>{{detail.city}}</th>
+                        <th>{{detail.state}}</th>
+                        <th>{{detail.country}}</th>
+                        <th><a href="{% url 'appointment_form' %}" class="my-3 mx-1"><span
+                            style="border:1px solid grey;padding:5px;">Book an appointment</span></a></th>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+{% endblock %}

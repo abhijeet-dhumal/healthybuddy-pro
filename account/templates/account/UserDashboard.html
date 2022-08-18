@@ -1,0 +1,20 @@
+{% extends 'account/base.html' %}
+
+
+{% block body %}
+{% load static %}
+    <div class="container" style="justify-content: center;align-items: center;margin-top: 5%;">
+        
+        <div class="container col-md-6" style="padding:30px;border:1px solid #aaa;margin-top: 10px;">
+            <div class="container d-flex">
+                <h1>Hii {{current_user}}: </h1>
+                <!-- <a href="" class="my-3"><span class="mx-4">@ {{current_user}}</span></a>
+                <a href="" ><button class="btn btn-outline-danger mx-4 my-2">LogOut</button></a> -->
+
+            </div>
+            <hr>
+            
+        </div>
+        
+    </div>
+{% endblock %}

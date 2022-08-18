@@ -1,0 +1,54 @@
+{% extends 'account/doctor_base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container" style="justify-content: center;align-items: left;">
+
+    <div class="container col-md-12">
+        <h1>User-Details : </h1>
+        <a href="{% url 'blogs_drafts' %}" class="my-3 mx-1"><span
+                style="border:1px solid grey;padding:5px;">Drafts</span></a>
+
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <!-- <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th> -->
+                    <th scope="col">Role</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Pincode</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{userdetails.id}}</th>
+                    <td>{{userdetails.username}}</a></td>
+                    <!-- <td>{{profiledetails.first_name}}</a></td>
+                        <td>{{profiledetails.last_name}}</a></td> -->
+                    <td>{{doctordetails.role}}</td>
+                    <td>{{userdetails.email}}</td>
+                    <td>{{doctordetails.address_line1}}</td>
+                    <td>{{doctordetails.city}}</td>
+                    <td>{{doctordetails.state}}</td>
+                    <td>{{doctordetails.country}}</td>
+                    <td>{{doctordetails.pincode}}</td>
+
+                    <td><a href="{% url 'updatedoctordetails' userdetails.id %}">Update</a></td>
+                    <td><a href="{% url 'deletedoctordetails' userdetails.id %}">Delete</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

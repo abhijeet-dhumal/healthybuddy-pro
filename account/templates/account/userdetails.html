@@ -1,0 +1,52 @@
+{% extends 'account/base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container" style="justify-content: center;align-items: center;margin-top: 5%;">
+
+    <div class="container col-md-12" style="padding:30px;border:1px solid #aaa;margin-top: 10px;">
+        <h1>User-Details : </h1>
+
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <!-- <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th> -->
+                    <th scope="col">Role</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Pincode</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{patientuserdetails.id}}</th>
+                    <td>{{userdetails.username}}</a></td>
+                    <!-- <td>{{profiledetails.first_name}}</a></td>
+                        <td>{{profiledetails.last_name}}</a></td> -->
+                    <td>{{profiledetails.role}}</td>
+                    <td>{{userdetails.email}}</td>
+                    <td>{{profiledetails.address_line1}}</td>
+                    <td>{{profiledetails.city}}</td>
+                    <td>{{profiledetails.state}}</td>
+                    <td>{{profiledetails.country}}</td>
+                    <td>{{profiledetails.pincode}}</td>
+
+                    <td><a href="{% url 'updateuserdetails' userdetails.id %}">Update</a></td>
+                    <td><a href="{% url 'deleteuserdetails' userdetails.id %}">Delete</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

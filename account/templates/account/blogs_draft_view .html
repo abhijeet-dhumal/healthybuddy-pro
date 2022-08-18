@@ -1,0 +1,70 @@
+{% extends 'account/home.html' %}
+
+
+{% block body %}
+{% load static %}
+<section class="home" style="justify-content: center;align-items: center;">
+    <div class="container" style="padding:5px;">
+        <div class="container">
+            <!-- blogs section starts  -->
+            
+            <section class="blogs" id="blogs">
+                
+                <h1 class="heading"> our <span>blogs</span> </h1>
+                
+                <div class="container-fluid my-3" style="align-items: center;">
+                    {% if doctor %}
+                    <a href="{% url 'blog-create' %}"><button class="btn btn-sm mx-3">Create</button></a>
+                    <a href="{% url 'blogs_drafts' %}"><button class="btn btn-sm mx-1">Drafts</button></a>
+                    {% endif %}
+                    <!-- <a href="{% url 'usernames' %}"
+                        style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
+    
+                    <hr>
+                    <form method="get my-3">
+                        {{myfilter.form}}
+                        <button class=" btn-outline-primary my-0 mx-2" type="submit" style="width:100px;">Search</a>
+                    </form>
+                </div>
+                <hr>
+                <div class="box-container">
+                    {% for detail in blogdetail %}
+                    
+                    <div class="box">
+                        <div class="image">
+                            <img src="{{detail.image.url}}" alt="">
+                        </div>
+                        <div class="content" style="align-items:center;text-align:center;">
+                            <div class="icon">
+                                <p class="m-0 p-0"><a href="#"> <i class="fas fa-calendar"></i> {{detail.publish_on}}
+                                    </a>
+                                </p><br>
+                                <p class="m-0 p-0"><a href="#"> <i class="fas fa-user"></i> {{detail.posted_by}} </a>
+                                </p>
+                                <br>
+                                <p class="m-0 p-0"><a href="#"> Category: {{detail.category}} </a></p>
+                                <br>
+                                
+                            </div>
+                            <h3>{{detail.title}}</h3>
+                            <p class="m-0 p-0">{{detail.text}}</p>
+                            <p></p>
+                            <div class="">
+                                {% if doctor %}
+                                <a href="{% url 'blog-update' detail.id %}" class="btn"> Update <span class="fas fa-chevron-right"></span> </a>
+                                {% endif %}
+                                <a href="#" class="btn mx-2"> learn more <span class="fas fa-chevron-right"></span> </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </section>
+        </div>
+
+    </div>
+</section>>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'account/base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid" style="align-items: center;justify-content: center;">
+    
+    <h1>Home</h1>
+    <div class="container">
+        <div class="container d-flex">
+            <h1>Doctor Users: </h1>
+            <!-- <a href="{% url 'blogs_view' %}" class="my-3" style="margin-left: 30vw;"><span
+                    style="border:1px solid grey;padding:5px;">Blogs</span></a>
+            <a href="{% url 'logoutuser' %}"><button class="btn btn-outline-danger mx-1 my-2">LogOut</button></a> -->
+
+        </div>
+        <span class="mx-4 my-3">Hii @{{current_user}} !!!</span>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Address</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doctordetail in object_list %}
+
+                        <tr>
+                            <th scope="row">{{doctordetail.id}}</th>
+                            <td><a href="{% url 'doctordetails' doctordetail.id %}">{{doctordetail.email}}</a></td>
+                            <th scope="row">{{doctordetail.phone}}</th>
+                            <th scope="row">{{doctordetail.address_line1}}, {{doctordetail.city}}, {{doctordetail.state}}, {{doctordetail.country}}</th>
+                            </th>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
