@@ -4,7 +4,7 @@
 
 ### Local Setup
 
-- `git clone https://github.com/banao-tech/duonut-back.git`
+- `git clone https://github.com/abhijeet-dhumal/healthybuddy-pro.git`
 
 - `cd duonut-back`
 
