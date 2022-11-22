@@ -1,4 +1,4 @@
-## Duonut Backend
+## HealthBuddy Backend
 
 ## Development Setup
 
