@@ -35,7 +35,6 @@ def home(request):
     reviews=Review.objects.all()[0:6]
     contactform = ContactForm(request.POST)
     if request.method =='POST':
-        print("came")
         name=request.POST.get('name')
         print(contactform)
         if contactform.is_valid():
@@ -322,9 +321,9 @@ def updateprofile(request):
     pk=request.user.id
     profiledetail=User.objects.get(id=pk)
     
-    profileform=UserRegisterForm(instance=request.user)
+    profileform=UserRegisterForm(request.FILES,instance=request.user)
     if request.method=='POST':
-        profileform=UserRegisterForm(request.POST,instance=request.user)
+        profileform=UserRegisterForm(request.POST,request.FILES, instance=request.user)
         if profileform.is_valid():
             profileform.save()
             return redirect('first_page')
@@ -565,13 +564,12 @@ def blogs_view(request):
         messages.success(request, f'Please login first as a authenticated user !')
         
         context={'userdetails':userdetails,'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count}
-        return render(request,"account/home.html",context)
+        return render(request,"account/after_login_home.html",context)
 
     context={'boolean':boolean,'userdetails':userdetails,'blogdetail':blogdetail,'current_user':current_user,'myfilter':myFilter,'doctor':boolean}
     return render(request,"account/blogs_view.html",context)
 
 @login_required
-@allowed_users(allowed_roles=['Admin','Doctor','Patient'])
 def blogs_draft_view(request):
     blogdetail=Blog.objects.filter(draft=True).all()
     myFilter = BlogFilter(request.GET, queryset= blogdetail)
