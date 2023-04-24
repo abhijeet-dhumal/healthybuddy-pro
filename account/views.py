@@ -19,7 +19,7 @@ from .decorators import *
 from django.contrib import messages
 
 
-def home(request):
+def home(request):        
     try:
         userdetails=User.objects.get(id=request.user.id)
     except:
@@ -29,11 +29,14 @@ def home(request):
     blog_count=Blog.objects.all().count()
     appointment_count=Appointment.objects.all().count()
     boolean=request.user.is_authenticated
-
     doctors=User.objects.filter(user_type='Doctor')[0:6]
 
     reviews=Review.objects.all()[0:6]
     contactform = ContactForm(request.POST)
+    if boolean:
+        context={'userdetails':userdetails,'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count,'doctors':doctors,'reviews':reviews,'contactform':contactform}
+        return render(request,"account/home.html",context)
+    
     if request.method =='POST':
         name=request.POST.get('name')
         print(contactform)
@@ -139,6 +142,8 @@ def authenticate_user(email, password):
 
 # @unauthenticated_user
 def LoginForm(request):
+    if request.user.is_authenticated:
+        return redirect('home')
     try:
         if request.method =='POST':
             email = request.POST.get('email')
@@ -174,7 +179,6 @@ def registerPage(request):
             # doctor_reg_form.save()
             name = User.objects.get(email=form1.cleaned_data.get('email')).name
 
-
             if form1.cleaned_data.get('user_type')=='Doctor':
             # to assign group name 
                 group=Group.objects.get(name='Doctor')
@@ -190,12 +194,17 @@ def registerPage(request):
 #             credentials = get_credentials()
 #             http = credentials.authorize(httplib2.Http())
 #             global service
-#             service = discovery.build('calendar', 'v3', http=http)  
+#             service = discovery.build('calendar', 'v3', http=http)
+            email = form1.cleaned_data.get('email')
+            password = form1.cleaned_data.get('password1')
+            user = authenticate_user(email, password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
 
             return redirect('LoginForm')  
     else:
-        form1 = UserRegisterForm()
-        # doctor_reg_form = UserForm()           
+        form1 = UserRegisterForm()       
 
     context = {}   
     context.update({'form1':form1}) 
@@ -553,6 +562,7 @@ def blogs_view(request):
     blog_count=Blog.objects.all().count()
     appointment_count=Appointment.objects.all().count()
     boolean=request.user.is_authenticated
+    is_doctor = (request.user.user_type=="Doctor")
     if boolean:
         userdetails=User.objects.get(id=request.user.id)
         blogdetail=Blog.objects.filter(draft=False).all()
@@ -566,7 +576,7 @@ def blogs_view(request):
         context={'userdetails':userdetails,'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count}
         return render(request,"account/after_login_home.html",context)
 
-    context={'boolean':boolean,'userdetails':userdetails,'blogdetail':blogdetail,'current_user':current_user,'myfilter':myFilter,'doctor':boolean}
+    context={'boolean':boolean,'userdetails':userdetails,'blogdetail':blogdetail,'current_user':current_user,'myfilter':myFilter,'doctor':is_doctor}
     return render(request,"account/blogs_view.html",context)
 
 @login_required
